@@ -10,43 +10,48 @@
                   <div class="flex items-center md:p-8 p-6 bg-white md:rounded-tr-[55px] md:rounded-br-[55px] h-full">
                     <form class="max-w-lg w-full mx-auto">
                       <div class="mb-12">
-                        <h3 class="text-gray-800 text-4xl font-bold">Create Your Account</h3>
+                        <h3 class="text-gray-800 text-2xl sm:text-4xl font-bold">Create Your Account</h3>
                         <p class="text-gray-800 text-sm mt-4 ">Already have an account <a href="#/login" class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Login here</a></p>
                       </div>
           
                          <div class="grid grid-cols-1 sm:grid-cols-2 mb-5 gap-x-5">
                       <div>
                         <label class="text-gray-800 text-xs block mb-2">First Name</label>
-                        <div class="relative flex items-center">
-                          <input name="first_name" type="text" required class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 pr-8 py-3 outline-none" placeholder="Enter your first name" />
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
-                            <defs>
-                              <clipPath id="a" clipPathUnits="userSpaceOnUse">
-                                <path d="M0 512h512V0H0Z" data-original="#000000"></path>
-                              </clipPath>
-                            </defs>
-                            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
-                              <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
-                              <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
-                            </g>
-                          </svg>
-                        </div>
+                       <div class="relative flex items-center">
+  <input
+    name="first_name"
+    type="text"
+    required
+    class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 pr-8 py-3 outline-none"
+    placeholder="Enter your first name"
+  />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-[26px] h-[26px] absolute right-2"
+    fill="#bbb"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+    />
+  </svg>
+</div>
+
                       </div>
                       <div>
                         <label class="text-gray-800 text-xs block mb-2">Last Name</label>
                         <div class="relative flex items-center">
                           <input name="last_name" type="text" required class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 pr-8 py-3 outline-none" placeholder="Enter your last name" />
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
-                            <defs>
-                              <clipPath id="a" clipPathUnits="userSpaceOnUse">
-                                <path d="M0 512h512V0H0Z" data-original="#000000"></path>
-                              </clipPath>
-                            </defs>
-                            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
-                              <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
-                              <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
-                            </g>
-                          </svg>
+                         <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-[26px] h-[26px] absolute right-2"
+    fill="#bbb"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+    />
+  </svg>
                         </div>
                       </div>
                       </div>
@@ -90,7 +95,7 @@
                     </form>
                   </div>
         <div class="max-md:order-1 p-4">
-          <img src="../assets/signin-image.webp" class="lg:max-w-[80%] w-full h-full object-contain block mx-auto" alt="login-image" />
+          <img src="../../assets/signin-image.webp" class="lg:max-w-[80%] w-full h-full object-contain block mx-auto" alt="login-image" />
         </div>
       </div>
     </div>

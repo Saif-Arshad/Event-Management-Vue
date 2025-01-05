@@ -7,7 +7,7 @@
  <div class="font-[sans-serif] bg-gray-900 md:h-screen">
       <div class="grid md:grid-cols-2 items-center gap-8 h-full">
         <div class="max-md:order-1 p-4">
-          <img src="../assets/signin-image.webp" class="lg:max-w-[80%] w-full h-full object-contain block mx-auto" alt="login-image" />
+          <img  src="../../assets/signin-image.webp"  class="lg:max-w-[80%] w-full h-full object-contain block mx-auto" alt="login-image" />
         </div>
 
         <div class="flex items-center md:p-8 p-6 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
