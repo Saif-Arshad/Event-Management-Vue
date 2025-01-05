@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue'
-import Home from './components/Home.vue'
-import LoginPage from './components/Login.vue'
-import RegisterPage from './components/Register.vue'
+import Home from './components/Pages/Home.vue'
+import LoginPage from './components/Pages/Login.vue'
+import RegisterPage from './components/Pages/Register.vue'
 
 
 const routes = {
@@ -17,6 +17,7 @@ window.addEventListener('hashchange', () => {
 const currentView = computed(() => {
   return routes[currentPath.value.slice(1) || '/'] || NotFound
 })
+const isShowHeader =  []
 
 </script>
 
