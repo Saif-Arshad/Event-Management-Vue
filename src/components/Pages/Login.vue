@@ -4,13 +4,29 @@
 </script>
 
 <template>
- <div class="font-[sans-serif] bg-gray-900 md:h-screen">
+ <div class="font-[sans-serif]  md:h-screen">
       <div class="grid md:grid-cols-2 items-center gap-8 h-full">
-        <div class="max-md:order-1 p-4">
-          <img  src="../../assets/signin-image.webp"  class="lg:max-w-[80%] w-full h-full object-contain block mx-auto" alt="login-image" />
-        </div>
+      <div class="relative max-md:order-1 h-full w-full">
+  <img 
+    src="../../assets/event.jpeg" 
+    class="absolute top-0 left-0 w-full h-full object-cover" 
+    alt="Register Background"
+  />
 
-        <div class="flex items-center md:p-8 p-6 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
+  <div class="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+    <h1 class="text-white text-4xl font-bold mb-4">
+     Welcome Back to Eventitude
+    </h1>
+    <p class="text-white text-lg max-w-lg">
+      Login to your account to manage events, connect with others, and explore amazing opportunities. Let’s make your next event unforgettable!
+    </p>
+  </div>
+</div>
+
+
+        <div class="flex items-center md:p-8 p-6 bg-white shadow-sm md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
           <form class="max-w-lg w-full mx-auto">
             <div class="mb-12">
               <h3 class="text-gray-800 text-4xl font-bold">Sign in</h3>
@@ -56,7 +72,7 @@
             </div>
 
             <div class="mt-12">
-              <button type="button" class="w-full py-3 px-6 text-sm font-semibold tracking-wider rounded-full text-white bg-gray-800 hover:bg-[#222] focus:outline-none">
+              <button type="button" class="w-full py-3 px-6 text-sm font-semibold tracking-wider rounded-full text-white bg-[#F4683D] hover:bg-[#222] focus:outline-none">
                 Sign in
               </button>
             </div>
