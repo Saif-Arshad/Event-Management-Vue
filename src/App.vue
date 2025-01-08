@@ -4,11 +4,13 @@ import Home from './components/Pages/Home.vue'
 import LoginPage from './components/Pages/Login.vue'
 import Header from './components/Header.vue'
 import RegisterPage from './components/Pages/Register.vue'
+import AccountPage from './components/Pages/Account.vue'
 
 const routes = {
   '/': Home,
   '/login': LoginPage,
-  '/register': RegisterPage
+  '/register': RegisterPage,
+  '/account': AccountPage
 }
 
 const currentPath = ref(window.location.hash)
@@ -20,7 +22,7 @@ const currentView = computed(() => {
   return routes[currentPath.value.slice(1) || '/'] || NotFound
 })
 
-const headerPages = ['/',]
+const headerPages = ['/']
 
 const isShowHeader = computed(() => {
   return headerPages.includes(currentPath.value.slice(1) || '/')
