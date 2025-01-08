@@ -3,22 +3,17 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 
-// ===================
-// State references
-// ===================
-const events = ref([]); // List of events
+const events = ref([]); 
 console.log("🚀 ~ events:", events)
 const user = ref(null); 
-const loading = ref(false); // Loading state
-const error = ref(null); // Error message (if any)
-const isModalOpen = ref(false); // Modal visibility
-const isUpdating = ref(false); // Whether updating or creating
-const selectedEventId = ref(null); // ID of the event to update
+const loading = ref(false); 
+const error = ref(null);
+const isModalOpen = ref(false); 
+const isUpdating = ref(false);
+const selectedEventId = ref(null); 
 const toast = useToast();
 
-// ===================
-// Event form
-// ===================
+
 const eventForm = ref({
   name: "",
   description: "",
@@ -28,9 +23,7 @@ const eventForm = ref({
   max_attendees: "",
 });
 
-// ===================
-// Fetch current user
-// ===================
+
 const fetchUserInfo = async () => {
   const token = localStorage.getItem("authToken");
   if (!token) {
@@ -51,9 +44,6 @@ const fetchUserInfo = async () => {
   }
 };
 
-// ===================
-// Fetch events
-// ===================
 const fetchEvents = async () => {
   loading.value = true;
   const token = localStorage.getItem("authToken");
@@ -74,9 +64,7 @@ const fetchEvents = async () => {
   }
 };
 
-// ==========================
-// Create or Update an event
-// ==========================
+
 const saveEvent = async () => {
   const token = localStorage.getItem("authToken");
   if (!token) {
@@ -88,9 +76,7 @@ const saveEvent = async () => {
     loading.value = true;
 
     if (isUpdating.value) {
-      // -----------------------
-      // Update existing event
-      // -----------------------
+
       await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/events/${selectedEventId.value}`,
         { ...eventForm.value },
@@ -100,9 +86,7 @@ const saveEvent = async () => {
       );
       toast.success("Event updated successfully!");
     } else {
-      // -----------------------
-      // Create new event
-      // -----------------------
+
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/events`,
         { ...eventForm.value },
@@ -123,9 +107,6 @@ const saveEvent = async () => {
   }
 };
 
-// ===================
-// Delete an event
-// ===================
 const deleteEvent = async (id) => {
   const token = localStorage.getItem("authToken");
   if (!token) {
@@ -150,19 +131,13 @@ const deleteEvent = async (id) => {
   }
 };
 
-// ========================================
-// Open the modal pre-filled for updating
-// ========================================
 const openUpdateModal = (event) => {
   isUpdating.value = true;
-  selectedEventId.value = event.event_id; // or `event.id` if your API uses "id"
+  selectedEventId.value = event.event_id; 
   eventForm.value = { ...event };
   isModalOpen.value = true;
 };
 
-// ===================
-// Reset form
-// ===================
 const resetForm = () => {
   eventForm.value = {
     name: "",
@@ -176,9 +151,11 @@ const resetForm = () => {
   selectedEventId.value = null;
 };
 
-// =========================
-// On component mount
-// =========================
+function formatDate(date) {
+   const options = { day: 'numeric', month: 'long', year: 'numeric' };
+   return new Date(date).toLocaleDateString('en-US', options); // Adjust locale as needed
+ }
+
 onMounted(() => {
   fetchUserInfo();
   fetchEvents();
@@ -186,24 +163,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen p-4">
-    <!-- ================
-         User Info
-         ================ -->
-    <div v-if="user" class="flex items-center gap-4 p-6 bg-gray-100 rounded-md">
+  <div class="min-h-screen p-4 bg-black">
+  
+    <div v-if="user" class="flex items-center gap-4 p-6 bg-neutral-800 rounded-md">
       <div class="w-full flex items-center justify-between">
         <div class="flex flex-row items-center gap-4">
-          <!-- Avatar (initial) -->
           <div class="bg-[#FA7D3B] h-24 w-24 flex items-center justify-center rounded-full text-white text-3xl font-bold uppercase">
             {{ user.first_name ? user.first_name[0] : 'U' }}
           </div>
 
-          <!-- Name & Email -->
           <div class="flex flex-col">
-            <span class="text-gray-800 text-2xl font-bold capitalize">
+            <span class="text-gray-100 text-2xl font-bold capitalize">
               {{ user.first_name }} {{ user.last_name }}
             </span>
-            <span class="text-gray-600">{{ user.email }}</span>
+            <span class="text-gray-300">{{ user.email }}</span>
           </div>
         </div>
 
@@ -217,151 +190,192 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- ================
-         Loading
-         ================ -->
     <div v-if="loading" class="text-center text-gray-500 mt-6">
       Loading...
     </div>
 
-    <!-- ================
-         Events List
-         ================ -->
+
     <div v-else class="mt-6">
-      <!-- No events message -->
       <div v-if="events.length === 0" class="text-center text-gray-500">
         No events available.
       </div>
 
-      <!-- Events Grid -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div
-          v-for="event in events"
-          :key="event.event_id" 
-          class="border p-4 rounded-md shadow-md bg-white"
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 gap-4">
+  <div
+    v-for="event in events"
+    :key="event.event_id"
+    class="p-4 rounded-xl shadow-md  bg-neutral-900 border border-neutral-700"
+  >
+   <div class="flex space-x-4 mb-4 items-center justify-end">
+      <!-- Edit Button -->
+      <button
+        @click="openUpdateModal(event)"
+        class="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
+        aria-label="Edit"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          class="w-6 h-6"
         >
-          <h3 class="text-lg font-bold mb-2">{{ event.name }}</h3>
-          <p class="text-sm text-gray-700 mb-1">
-            {{ event.description }}
-          </p>
-          <p class="text-sm">
-            <strong>Location:</strong> {{ event.location }}
-          </p>
-          <p class="text-sm">
-            <strong>Start Date:</strong> {{ event.start_date }}
-          </p>
-          <p class="text-sm">
-            <strong>Close Registration:</strong> {{ event.close_registration }}
-          </p>
-          <p class="text-sm">
-            <strong>Max Attendees:</strong> {{ event.max_attendees }}
-          </p>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15.232 5.232l3.536 3.536M4 20h4.75a2 2 0 001.414-.586l10.243-10.243a2 2 0 000-2.828l-3.536-3.536a2 2 0 00-2.828 0L4.586 15.414A2 2 0 004 16.828V20z"
+          />
+        </svg>
+      </button>
 
-          <!-- Action Buttons -->
-          <div class="flex space-x-2 mt-4">
-            <button
-              @click="openUpdateModal(event)"
-              class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-            >
-              Update
-            </button>
-            <button
-              @click="deleteEvent(event.event_id)"
-              class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
+      <!-- Delete Button -->
+      <button
+        @click="deleteEvent(event.event_id)"
+        class="flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+        aria-label="Delete"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"
+          />
+        </svg>
+      </button>
+    </div>
+    <h3 class="text-2xl text-white capitalize lg:text-3xl xl:text-4xl font-bold mb-2">
+      {{ event.name }}
+    </h3>
+    <p class="text-sm text-gray-400 mb-6">{{ event.description }}</p>
+    <p class="text-sm text-gray-300">
+      <strong>Location:</strong> {{ event.location }}
+    </p>
+    <p class="text-sm text-gray-300 mt-1">
+      <strong>Max Attendees:</strong> {{ event.max_attendees }}
+    </p>
+    <div class="flex flex-col md:flex-row md:items-center justify-between mt-1 space-y-2 md:space-y-0">
+  <p class="text-sm text-gray-300">
+    <strong>Start Date:</strong> {{ formatDate(event.start_date) }}
+  </p>
+  <p class="text-sm text-gray-300">
+    <strong>Close Registration:</strong> {{ formatDate(event.close_registration) }}
+  </p>
+
+
+</div>
+<div class="flex items-center justify-end mt-9">
+<button
+class="px-6 py-2 bg-[#FA7D3B] text-white rounded-full hover:bg-[#e77026] transition"
+
+>
+Detail
+</button>
+</div>
+
+
+   
+  </div>
+</div>
+
     </div>
 
-    <!-- ================
-         Modal
-         ================ -->
     <div
       v-if="isModalOpen"
       class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4"
     >
-      <div class="bg-white rounded-lg shadow-lg w-full max-w-[500px] max-h-full overflow-y-auto p-6">
-        <h3 class="text-xl font-bold mb-4">
+      <div class="bg-neutral-800 rounded-lg shadow-lg w-full max-w-[500px] max-h-full overflow-y-auto p-6">
+        <h3 class="text-xl font-bold text-white mb-4">
           {{ isUpdating ? "Update Event" : "Create Event" }}
         </h3>
 
-        <!-- Event Form -->
         <div class="space-y-4">
-          <!-- Name -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label class="block text-sm font-medium text-gray-300">
               Name
             </label>
             <input
               v-model="eventForm.name"
               type="text"
-              class="mt-1 block w-full border p-2 rounded-md shadow-sm"
+              placeholder="Enter Event Name"
+              class=" block w-full mt-2 bg-neutral-700 outline-none text-white p-2 rounded-md shadow-sm"
             />
           </div>
-          <!-- Description -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label class="block text-sm font-medium text-gray-300">
               Description
             </label>
             <textarea
               v-model="eventForm.description"
-              class="mt-1 block w-full border p-2 rounded-md shadow-sm"
+              placeholder="Enter Event Detail"
+                           class=" block w-full mt-2 bg-neutral-700 outline-none text-white p-2 rounded-md shadow-sm"
             ></textarea>
           </div>
-          <!-- Location -->
+        
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+
           <div>
-            <label class="block text-sm font-medium text-gray-700">
-              Location
-            </label>
-            <input
-              v-model="eventForm.location"
-              type="text"
-              class="mt-1 block w-full border p-2 rounded-md shadow-sm"
-            />
-          </div>
-          <!-- Start Date -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label class="block text-sm font-medium text-gray-300">
               Start Date
             </label>
             <input
               v-model="eventForm.start_date"
               type="date"
-              class="mt-1 block w-full border p-2 rounded-md shadow-sm"
+                                       class=" block w-full mt-2 bg-neutral-700 outline-none text-white p-2 rounded-md shadow-sm"
+
             />
           </div>
-          <!-- Close Registration -->
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label class="block text-sm font-medium text-gray-300">
               Close Registration
             </label>
             <input
               v-model="eventForm.close_registration"
               type="date"
-              class="mt-1 block w-full border p-2 rounded-md shadow-sm"
+                                      class=" block w-full mt-2 bg-neutral-700 outline-none text-white p-2 rounded-md shadow-sm"
+
             />
           </div>
-          <!-- Max Attendees -->
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              <div>
+            <label class="block text-sm font-medium text-gray-300">
+              Location
+            </label>
+            <input
+              v-model="eventForm.location"
+              placeholder="Enter Event Location"
+              type="text"
+                                       class=" block w-full mt-2 bg-neutral-700 outline-none text-white p-2 rounded-md shadow-sm"
+
+            />
+          </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">
+            <label class="block text-sm font-medium text-gray-300">
               Max Attendees
             </label>
             <input
               v-model="eventForm.max_attendees"
+              placeholder="Enter Max Attendees Event"
               type="number"
-              class="mt-1 block w-full border p-2 rounded-md shadow-sm"
+                                      class=" block w-full mt-2 bg-neutral-700 outline-none text-white p-2 rounded-md shadow-sm"
+
             />
           </div>
         </div>
+        </div>
 
-        <!-- Modal Buttons -->
         <div class="mt-6 flex justify-end space-x-2">
           <button
             @click="() => { isModalOpen = false; resetForm(); }"
-            class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition"
+            class="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800 transition"
           >
             Cancel
           </button>

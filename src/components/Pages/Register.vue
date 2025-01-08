@@ -57,17 +57,17 @@ const register = async () => {
 </script>
 
 <template>
-  <div class="font-[sans-serif] md:h-screen">
+  <div class="font-[sans-serif] md:h-screen bg-black">
     <div class="grid md:grid-cols-2 items-center gap-8 h-full">
       <div
-        class="flex items-center md:p-8 p-6 bg-white md:rounded-tr-[55px] md:rounded-br-[55px] h-full"
+        class="flex items-center md:p-8 p-6 bg-black md:rounded-tr-[55px] md:rounded-br-[55px] h-full"
       >
-        <form @submit.prevent="register" class="max-w-lg w-full mx-auto">
+        <form @submit.prevent="register" class="max-w-lg w-full mx-auto bg-black">
           <div class="mb-12">
-            <h3 class="text-gray-800 text-2xl sm:text-4xl font-bold">
+            <h3 class=" text-2xl text-white sm:text-4xl font-bold">
               Create Your Account
             </h3>
-            <p class="text-gray-800 text-sm mt-4">
+            <p class="text-gray-200 text-sm mt-4">
               Already have an account
               <a
                 href="#/login"
@@ -79,23 +79,24 @@ const register = async () => {
 
           <div class="grid grid-cols-1 sm:grid-cols-2 mb-5 gap-x-5">
             <div>
-              <label class="text-gray-800 text-xs block mb-2">First Name</label>
+              <label class="text-gray-200 text-xs block mb-2">First Name</label>
               <input
                 v-model="firstName"
                 name="first_name"
                 type="text"
-                class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 py-3 outline-none"
+                class="w-full text-sm border-b border-gray-100 bg-black text-white focus:border-gray-800 pl-2 py-3 outline-none"
                 placeholder="Enter your first name"
                 required
               />
             </div>
             <div>
-              <label class="text-gray-800 text-xs block mb-2">Last Name</label>
+              <label class="text-gray-200 text-xs block mb-2">Last Name</label>
               <input
                 v-model="lastName"
                 name="last_name"
                 type="text"
-                class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 py-3 outline-none"
+                             class="w-full text-sm border-b border-gray-100 bg-black text-white focus:border-gray-800 pl-2 py-3 outline-none"
+
                 placeholder="Enter your last name"
                 required
               />
@@ -103,25 +104,27 @@ const register = async () => {
           </div>
 
           <div class="mb-5">
-            <label class="text-gray-800 text-xs block mb-2">Email</label>
+            <label class="text-gray-200 text-xs block mb-2">Email</label>
             <input
               v-model="email"
               name="email"
               type="email"
-              class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 py-3 outline-none"
+                             class="w-full text-sm border-b border-gray-100 bg-black text-white focus:border-gray-800 pl-2 py-3 outline-none"
+
               placeholder="Enter email"
               required
             />
           </div>
 
           <div>
-            <label class="text-gray-800 text-xs block mb-2">Password</label>
+            <label class="text-gray-200 text-xs block mb-2">Password</label>
             <div class="relative">
               <input
                 v-model="password"
                 name="password"
                 :type="showPassword ? 'text' : 'password'"
-                class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 pr-10 py-3 outline-none"
+                            class="w-full text-sm border-b border-gray-100 bg-black text-white focus:border-gray-800 pl-2 py-3 outline-none"
+
                 placeholder="Enter password"
                 required
               />
@@ -129,7 +132,7 @@ const register = async () => {
                 @click="showPassword = !showPassword"
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-5 h-5 absolute right-2 top-2.5 cursor-pointer"
-                fill="currentColor"
+                fill="#F4683D"
                 viewBox="0 0 24 24"
               >
                 <path

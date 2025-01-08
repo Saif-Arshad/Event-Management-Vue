@@ -54,7 +54,7 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="font-[sans-serif] md:h-screen">
+  <div class="font-[sans-serif] md:h-screen bg-black">
     <div class="grid md:grid-cols-2 items-center gap-8 h-full">
       <!-- Background Section -->
       <div class="relative max-md:order-1 h-full w-full">
@@ -80,12 +80,12 @@ const login = async () => {
 
       <!-- Login Form -->
       <div
-        class="flex items-center md:p-8 p-6 bg-white shadow-sm md:rounded-tl-[55px] md:rounded-bl-[55px] h-full"
+        class="flex items-center md:p-8 p-6 bg-black shadow-sm md:rounded-tl-[55px] md:rounded-bl-[55px] h-full"
       >
         <form @submit.prevent="login" class="max-w-lg w-full mx-auto">
           <div class="mb-12">
-            <h3 class="text-gray-800 text-4xl font-bold">Sign in</h3>
-            <p class="text-gray-800 text-sm mt-4">
+            <h3 class="text-gray-100 text-4xl font-bold">Sign in</h3>
+            <p class="text-gray-300 text-sm mt-4">
               Don't have an account
               <a
                 href="#/register"
@@ -97,13 +97,14 @@ const login = async () => {
 
           <!-- Email -->
           <div>
-            <label class="text-gray-800 text-xs block mb-2">Email</label>
+            <label class="text-gray-200 text-xs block mb-2">Email</label>
             <div class="relative flex items-center">
               <input
                 v-model="email"
                 type="email"
                 required
-                class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 pr-8 py-3 outline-none"
+                                            class="w-full text-sm border-b border-gray-100 bg-black text-white focus:border-gray-800 pl-2 py-3 outline-none"
+
                 placeholder="Enter email"
               />
               <svg
@@ -118,15 +119,16 @@ const login = async () => {
             </div>
           </div>
 
-          <!-- Password -->
+        
           <div class="mt-8">
-            <label class="text-gray-800 text-xs block mb-2">Password</label>
+            <label class="text-gray-200 text-xs block mb-2">Password</label>
             <div class="relative flex items-center">
               <input
                 v-model="password"
                 :type="showPassword ? 'text' : 'password'"
                 required
-                class="w-full text-sm border-b border-gray-300 focus:border-gray-800 pl-2 pr-8 py-3 outline-none"
+                                           class="w-full text-sm border-b border-gray-100 bg-black text-white focus:border-gray-800 pl-2 py-3 outline-none"
+
                 placeholder="Enter password"
               />
             <svg
