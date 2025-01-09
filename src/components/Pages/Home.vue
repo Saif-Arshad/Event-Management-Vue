@@ -1,5 +1,33 @@
 <script setup>
 
+import { ref, onMounted } from "vue";
+import axios from "axios";
+const loading = ref(false); 
+const events = ref([]); 
+
+
+
+const fetchEvents = async () => {
+  loading.value = true;
+
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/events/all-events`,);
+    console.log( response.data)
+    events.value = response.data.events || [];
+  } catch (err) {
+    toast.error(err.response?.data?.message || "Failed to fetch events.");
+  } finally {
+    loading.value = false;
+  }
+};
+function formatDate(date) {
+   const options = { day: 'numeric', month: 'long', year: 'numeric' };
+   return new Date(date).toLocaleDateString('en-US', options); // Adjust locale as needed
+ }
+onMounted(() => {
+  fetchEvents();
+});
 </script>
 
 <template>
@@ -22,6 +50,54 @@
 
 </div>
     </div>
+  </div>
+
+  <div class="bg-black p-5 w-full ">
+ <h1 class="text-white text-5xl lg:max-w-3xl text-center  mx-auto font-extrabold leading-tight">
+   Latest Events
+  </h1>
+     <div v-if="loading" class="text-center text-gray-500 mt-6">
+      Loading...
+    </div>
+  <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 gap-4 mt-10">
+  <div
+    v-for="event in events"
+    :key="event.event_id"
+    class="p-4 rounded-xl shadow-md  bg-neutral-900 border border-neutral-700"
+  >
+    <h3 class="text-2xl text-white capitalize lg:text-3xl xl:text-4xl font-bold mb-2">
+      {{ event.name }}
+    </h3>
+    <p class="text-sm text-gray-400 mb-6">{{ event.description }}</p>
+    <p class="text-sm text-gray-300">
+      <strong>Location:</strong> {{ event.location }}
+    </p>
+    <p class="text-sm text-gray-300 mt-1">
+      <strong>Max Attendees:</strong> {{ event.max_attendees }}
+    </p>
+    <div class="flex flex-col md:flex-row md:items-center justify-between mt-1 space-y-2 md:space-y-0">
+  <p class="text-sm text-gray-300">
+    <strong>Start Date:</strong> {{ formatDate(event.start_date) }}
+  </p>
+  <p class="text-sm text-gray-300">
+    <strong>Close Registration:</strong> {{ formatDate(event.close_registration) }}
+  </p>
+
+
+</div>
+<div class="flex items-center justify-end mt-9">
+<a
+  :href="`#/events/${event.event_id}`"
+  class="px-6 py-2 bg-[#FA7D3B] text-white rounded-full hover:bg-[#e77026] transition inline-block text-center "
+>
+  Detail
+</a>
+</div>
+
+
+   
+  </div>
+</div>
   </div>
 
 </template>

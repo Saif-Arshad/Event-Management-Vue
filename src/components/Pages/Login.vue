@@ -56,8 +56,7 @@ const login = async () => {
 <template>
   <div class="font-[sans-serif] md:h-screen bg-black">
     <div class="grid md:grid-cols-2 items-center gap-8 h-full">
-      <!-- Background Section -->
-      <div class="relative max-md:order-1 h-full w-full">
+      <div class="relative max-md:order-1 hidden md:flex h-full w-full">
         <img
           src="../../assets/event.jpeg"
           class="absolute top-0 left-0 w-full h-full object-cover"

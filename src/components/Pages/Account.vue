@@ -166,14 +166,14 @@ onMounted(() => {
   <div class="min-h-screen p-4 bg-black">
   
     <div v-if="user" class="flex items-center gap-4 p-6 bg-neutral-800 rounded-md">
-      <div class="w-full flex items-center justify-between">
+      <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center justify-between">
         <div class="flex flex-row items-center gap-4">
           <div class="bg-[#FA7D3B] h-24 w-24 flex items-center justify-center rounded-full text-white text-3xl font-bold uppercase">
             {{ user.first_name ? user.first_name[0] : 'U' }}
           </div>
 
           <div class="flex flex-col">
-            <span class="text-gray-100 text-2xl font-bold capitalize">
+            <span class="text-gray-100 text-xl font-semibold sm:text-2xl sm:font-bold capitalize">
               {{ user.first_name }} {{ user.last_name }}
             </span>
             <span class="text-gray-300">{{ user.email }}</span>
@@ -272,12 +272,14 @@ onMounted(() => {
 
 </div>
 <div class="flex items-center justify-end mt-9">
-<button
-class="px-6 py-2 bg-[#FA7D3B] text-white rounded-full hover:bg-[#e77026] transition"
-
+<a
+  :href="`#/events/${event.event_id}`"
+  class="px-6 py-2 bg-[#FA7D3B] text-white rounded-full hover:bg-[#e77026] transition inline-block text-center "
 >
-Detail
-</button>
+  Detail
+</a>
+
+
 </div>
 
 
